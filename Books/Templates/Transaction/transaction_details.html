@@ -1,0 +1,113 @@
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- Ensure there is no comma after 'stylesheet' -->
+    <style>
+
+       /* Styles for navbar */
+        .navbar {
+            background-color: black;
+            padding: 10px 0; /* Added padding to the top and bottom */
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+        }
+
+        .navbar-link {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .navbar-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Styles for form */
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-button {
+            padding: 10px 20px;
+            background-color: black;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .form-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="{% url 'book_list' %}" class="navbar-link">Books</a>
+        <a href="{% url 'members_list' %}" class="navbar-link">Members</a>
+        <a href="{% url 'transaction_list' %}" class="navbar-link">Transactions</a>
+    </div>
+
+    <!-- Transaction form -->
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+               <label for="book">Book:</label>
+                <select id="book" name="book" class="form-control">
+                   <option value="">Select a book</option>
+                    {% for book in books %}
+                    <option value="{{ book.id }}">{{ book.title }}</option>
+               {% endfor %}
+               </select>
+           </div>
+
+
+
+            <div class="form-group">
+                <label for="return_date">Return Date:</label>
+                <input type="date" id="return_date" name="return_date" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="rent_fee">Rent Fee:</label>
+                <input type="number" id="rent_fee" name="rent_fee" placeholder="Enter rent fee" class="form-control">
+            </div>
+
+            <button type="submit" class="form-button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
