@@ -4,6 +4,19 @@ Library Management System
 
 The Library Management System is a Django-based web application designed to help manage the operations of a library, including tracking books, managing members, and handling transactions such as borrowing and returning books.
 
+## Instructions 
+create a virtual environment:
+- mkvirtualenv library -p python3
+
+Activate the env:
+- library\Scripts\activate
+
+Work on the env:
+-workon library
+
+Run the server:
+-py manage.py runserver
+
 ## Features
 
 - **Manage Books**: Add, update, and remove books from the library inventory. Each book includes details such as title, author, publication date, and stock quantity.
