@@ -1,0 +1,137 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Transaction List</title>
+    <style>
+        /* Styles for navbar */
+        .navbar {
+            background-color: black;
+            padding: 10px 0; /* Added padding to the top and bottom */
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+        }
+
+        .navbar-link {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .navbar-link:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 3px solid #ddd;
+            border-color:black;
+            color:#F2F7A1;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            color:#F2F7A1;
+        }
+
+        tr:nth-child(even) {
+             color:#F2F7A1;
+        }
+        .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    </style>
+</head>
+<body>
+     <div class="navbar">
+        <a href="{% url 'books' %}" class="navbar-link">Books</a>
+        <a href="{% url 'members' %}" class="navbar-link">Members</a>
+        <a href="" class="navbar-link">Transactions</a>
+    </div>
+    <h1>Transaction List</h1>
+    <!-- Table to display transactions -->
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Book</th>
+                <th>Member</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+                <th>Rent Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.book.title }}</td> <!-- Accessing the title of the book -->
+                <td>{{ transaction.member.Member_name }}</td> <!-- Accessing the name of the member -->
+                <td>{{ transaction.issue_date }}</td>
+                <td>{{ transaction.return_date }}</td>
+                <td>{{ transaction.rent_fee }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Link to add new transaction -->
+    <div class="add-member-form">
+        <h2>Add New Transaction</h2>
+        <!-- Add member form -->
+        <!-- Form to add a new transaction -->
+        <form action="{% url 'transaction-create'%}">
+            {% csrf_token %}
+            <button type="submit">New Transaction</button>
+        </form>
+    </div>
+
+      <<form action="{% url 'transaction-delete' transaction.id %}">
+          <button type="submit">Delete</button>
+      </form>
+</body>
+</html>
+<!-- Add member form -->

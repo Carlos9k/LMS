@@ -1,0 +1,129 @@
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Members List</title>
+    <style>
+         /* Styles for navbar */
+        .navbar {
+            background-color: black;
+            padding: 10px 0; /* Added padding to the top and bottom */
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+        }
+
+        .navbar-link {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .navbar-link:hover {
+            text-decoration: underline;
+        }
+
+        .member-container {
+            margin-top: 20px;
+            color:#F2F7A1;
+
+        }
+        /* Styles for Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 3px solid #ddd;
+            border-color:black;
+            color:#F2F7A1;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            color:#F2F7A1;
+        }
+        tr:nth-child(even) {
+             color:#F2F7A1;
+        }
+        .member-name a {
+               color: #F2F7A1;
+               text-decoration: none; /* Optional: remove underlines from links */
+        }
+
+         .member-name a:hover {
+              text-decoration: underline; /* Optional: add underlines on hover */
+         }
+
+        .add-member-form {
+            margin-top: 20px;
+        }
+
+        .add-member-form h2 {
+            margin-bottom: 10px;
+        }
+
+        .add-member-form input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .add-member-form button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-member-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'books' %}" class="navbar-link">Books</a>
+        <a href="{% url 'members' %}" class="navbar-link">Members</a>
+        <a href="" class="navbar-link">Transactions</a>
+    </div>
+    <div class="member-container">
+        {% if members %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Member Name</th>
+                        <th>Outstanding Debt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in members %}
+                       <tr>
+                          <td class="member-name"><a href="{% url 'member' member.id %}">{{ member.Member_name }}</a></td>
+                           <td>{{ member.outstanding_debt }}</td>
+                       </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        {% else %}
+            <p>No members found.</p>
+        {% endif %}
+    </div>
+    <div class="add-member-form">
+
+        <!-- Add member form -->
+        <form action="{% url 'member-create' %}">
+          {% csrf_token %}
+          <button type="submit">Add Member</button>
+        </form>
+    </div>
+</body>
+</html>

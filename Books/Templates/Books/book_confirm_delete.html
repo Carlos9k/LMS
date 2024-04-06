@@ -1,0 +1,8 @@
+{% load static %}
+<a href="{% url 'books'%}">Go Back</a>
+ <link rel="stylesheet" href="{% static 'css/main.css' %}">
+<form method="post">
+    {% csrf_token %}  <!---required for the security to prevent CSRF attacks-->
+    <p>Are you sure you want to delete? "{{book}}"</p>
+    <input type="submit" value="Delete"/>
+</form>

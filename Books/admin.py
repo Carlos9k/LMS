@@ -8,7 +8,7 @@ admin.site.site_header = "Library Managment System"
 admin.site.site_title = "LMS"
 
 
-# @admin.register(Book)
+# @admin.register(Books)
 class BookAdmin(admin.ModelAdmin):
     fields = ('title', 'authors', 'average_rating', 'isbn', 'isbn13', 'language_code', 'num_pages',
               'ratings_count',
