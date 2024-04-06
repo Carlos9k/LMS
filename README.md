@@ -1,5 +1,5 @@
 # LMS
-Library Management System
+Library Management System using Class BAsed View
 # Library Management System
 
 The Library Management System is a Django-based web application designed to help manage the operations of a library, including tracking books, managing members, and handling transactions such as borrowing and returning books.
